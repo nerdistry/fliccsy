@@ -80,6 +80,7 @@ fun SwipingBox(
 
                             },
                             onSwipeCancel = {
+                                navController.navigate(AllRoutes.Home.name)
                                 Log.d("Swipeable-Card", "Cancelled swipe")
                                 hint = "You canceled the swipe"
                             }

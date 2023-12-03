@@ -88,7 +88,15 @@ fun AddProfile(
         )
 
         Button(
-            onClick = { navController.navigate(AllRoutes.Profile.name) },
+            onClick = {
+                SampleProfiles.profileSample.add(
+                    Profile(
+                        R.drawable.profile2,
+                        "Morty"
+                    )
+                )
+                navController.navigate(AllRoutes.Profile.name)
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFFE50914)),
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
