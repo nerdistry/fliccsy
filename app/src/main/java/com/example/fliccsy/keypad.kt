@@ -39,6 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 
 class KeyPadActivity {
@@ -50,7 +51,10 @@ class KeyPadActivity {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun build() {
+    fun keypadScreen(
+        navController: NavHostController
+
+    ) {
         var key by remember { mutableStateOf("") }
 
         val containerColors = TextFieldDefaults.textFieldColors(
@@ -173,7 +177,7 @@ class KeyPadActivity {
                     Button(
                         modifier = Modifier.fillMaxWidth(),
                         onClick = {
-                            Toast.makeText(context, "Verify Clicked", Toast.LENGTH_SHORT).show()
+                            navController.navigate(AllRoutes.Profile.name)
                         },
                         shape = CutCornerShape(0),
                         colors = ButtonDefaults
