@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
@@ -19,9 +20,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-
-
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : ComponentActivity() {
@@ -37,13 +39,15 @@ class SplashActivity : ComponentActivity() {
 
     @Preview
     @Composable
-    private fun SplashScreen() {
+    private fun SplashScreen(
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color(0xFF000000)),
             contentAlignment = Alignment.Center
         ) {
+
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
                     painter = painterResource(id = R.drawable.fliccsy_logo),

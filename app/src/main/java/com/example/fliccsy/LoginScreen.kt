@@ -1,5 +1,6 @@
 package com.example.fliccsy
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -36,13 +37,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun LoginScreen(){
+fun LoginScreen(
+    navController: NavHostController
+){
     Column (
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(start = 15.dp, end = 15.dp, top = 50.dp),
     ) {
+
         Text(
             text = "Log in",
             color = Color.White,
@@ -79,7 +89,7 @@ fun LoginScreen(){
         )
         Spacer(modifier = Modifier.height(50.dp))
         Button(
-            onClick = {},
+            onClick = { navController.navigate(AllRoutes.Home.name) },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE50914)),
             modifier = Modifier.size(width = 366.dp, height = 54.dp),
             shape = RoundedCornerShape(8.dp)
@@ -129,7 +139,9 @@ fun LoginScreen(){
                 color = MaterialTheme.colorScheme.outline
             )
             TextButton(
-                onClick = {},
+                onClick = {
+                          navController.navigate(route = "Signup")
+                },
                 content = {
                     Text(
                         text = "Sign up here",

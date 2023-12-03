@@ -53,11 +53,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun HomeScreen(){
+fun HomeScreen(
+    navController: NavHostController
+
+){
     val images = listOf(
         R.drawable.aladin,
         R.drawable.littlemermaid,
@@ -77,25 +81,25 @@ fun HomeScreen(){
                 ) {
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {  },
+                        onClick = { navController.navigate(AllRoutes.Home.name) },
                         icon = {
                             Icon(imageVector = Icons.Default.Home, contentDescription = null, tint = Color.White)
                         },
-                        label = { Text("Settings", fontSize = 10.sp, color = Color.White) },
+                        label = { Text("Home", fontSize = 10.sp, color = Color.White) },
                         alwaysShowLabel = true
                     )
                     BottomNavigationItem(
                         selected = false,
-                        onClick = { },
+                        onClick = { navController.navigate(AllRoutes.Swiping.name) },
                         icon = {
                             Icon(imageVector = Icons.Default.PlayArrow, contentDescription = null,tint = Color.White)
                         },
-                        label = { Text("Settings", fontSize = 10.sp, color = Color.White) },
+                        label = { Text("Swipe", fontSize = 10.sp, color = Color.White) },
                         alwaysShowLabel = true
                     )
                     BottomNavigationItem(
                         selected = false,
-                        onClick = { },
+                        onClick = { navController.navigate(AllRoutes.Settings.name) },
                         icon = {
                             Icon(imageVector = Icons.Default.Settings, contentDescription = null, tint = Color.White)
                         },

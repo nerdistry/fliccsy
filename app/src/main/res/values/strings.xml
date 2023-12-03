@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Fliccsy</string>
+    <string name="login">Fliccsy</string>
+    <string name="signup">Fliccsy</string>
+    <string name="home">Fliccsy</string>
+    <string name="swipe">Fliccsy</string>
+    <string name="home2">Fliccsy</string>
+    <string name="keypad">Fliccsy</string>
+    <string name="settings">Fliccsy</string>
+    <string name="add_profile">Fliccsy</string>
+    <string name="profiles">Fliccsy</string>
+    <string name="splash">Fliccsy</string>
+    <string name="my_hint">Anna</string>
+    <string name="edit_description">Edit Pic</string>
+    <string name="save_description">Save Pic</string>
+    <string name="profile">Profile Pic</string>
 </resources>

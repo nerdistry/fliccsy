@@ -36,9 +36,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @Composable
-fun SignupScreen(){
+fun SignupScreen(
+    navController: NavHostController
+){
     Column (
         modifier = Modifier.fillMaxWidth()
             .padding(start = 15.dp, end = 15.dp, top = 50.dp),
@@ -81,7 +84,7 @@ fun SignupScreen(){
         )
         Spacer(modifier = Modifier.height(20.dp))
         Button(
-            onClick = {},
+            onClick = { navController.navigate(AllRoutes.Keypad.name) },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE50914)),
             modifier = Modifier.size(width = 366.dp, height = 54.dp),
             shape = RoundedCornerShape(8.dp)

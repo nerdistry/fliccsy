@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 class AppSettings {
 
@@ -44,7 +45,10 @@ class AppSettings {
     private val redColor = Color(0xFFE50914)
 
     @Composable
-    fun build() {
+    fun build(
+        navController: NavHostController,
+
+        ) {
         var checked by remember { mutableStateOf(true) }
 
         Box(

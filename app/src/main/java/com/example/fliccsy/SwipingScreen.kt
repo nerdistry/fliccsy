@@ -42,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.alexstyl.swipeablecard.Direction
 import com.alexstyl.swipeablecard.ExperimentalSwipeableCardApi
 import com.alexstyl.swipeablecard.rememberSwipeableCardState
@@ -51,7 +52,9 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
-fun SwipingBox(){
+fun SwipingBox(
+    navController: NavHostController,
+){
     val state = rememberSwipeableCardState()
     val states = movies.reversed()
         .map { it to rememberSwipeableCardState() }
