@@ -227,10 +227,6 @@ object SampleProfiles {
         Profile(
             R.drawable.profile,
             "Rick"
-        ),
-        Profile(
-            R.drawable.profile2,
-            "Morty"
         )
     )
 }
