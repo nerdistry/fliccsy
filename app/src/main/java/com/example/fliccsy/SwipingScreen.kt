@@ -22,12 +22,15 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,6 +46,8 @@ import com.alexstyl.swipeablecard.Direction
 import com.alexstyl.swipeablecard.ExperimentalSwipeableCardApi
 import com.alexstyl.swipeablecard.rememberSwipeableCardState
 import com.alexstyl.swipeablecard.swipableCard
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
@@ -51,7 +56,7 @@ fun SwipingBox(){
     val states = movies.reversed()
         .map { it to rememberSwipeableCardState() }
     var hint by remember {
-        mutableStateOf("Swipe a card or press a button below")
+        mutableStateOf("Swipe left to like and right to dislike")
     }
 
     Hint(hint)
@@ -69,21 +74,21 @@ fun SwipingBox(){
                             state = state,
                             blockedDirections = listOf(Direction.Down),
                             onSwiped = {
-                                // swipes are handled by the LaunchedEffect
-                                // so that we track button clicks & swipes
-                                // from the same place
+
                             },
                             onSwipeCancel = {
                                 Log.d("Swipeable-Card", "Cancelled swipe")
                                 hint = "You canceled the swipe"
                             }
                         ),
-                    movie = movie
+                    movie = movie,
+                    hint = hint
                 )
             }
             LaunchedEffect(movie, state.swipedDirection) {
                 if (state.swipedDirection != null) {
                     hint = "You swiped ${stringFrom(state.swipedDirection!!)}"
+
                 }
             }
         }
@@ -117,7 +122,7 @@ private fun Hint(text: String) {
 }
 
 @Composable
-fun MovieCard(modifier: Modifier,movie: Movie){
+fun MovieCard(modifier: Modifier,movie: Movie,hint: String){
     Box(
        modifier = modifier
     ){
@@ -223,5 +228,34 @@ fun MovieCard(modifier: Modifier,movie: Movie){
                 fontWeight = FontWeight.Bold
             )
         }
+        CustomToast(message = hint)
+    }
+}
+
+@Composable
+fun CustomToast(message: String, durationMillis: Long = 2000) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(snackbarHostState) {
+        coroutineScope.launch {
+            snackbarHostState.showSnackbar(message)
+            delay(durationMillis)
+            snackbarHostState.currentSnackbarData?.dismiss()
+        }
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+        )
     }
 }
