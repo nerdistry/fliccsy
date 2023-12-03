@@ -96,6 +96,7 @@ fun LoginScreen(
         ){
             Text(
                 text = "Log in",
+                color = Color.White,
                 fontWeight = FontWeight.Bold,
             )
         }

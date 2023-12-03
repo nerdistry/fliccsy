@@ -91,6 +91,7 @@ fun SignupScreen(
         ){
             Text(
                 text = "Sign up",
+                color = Color.White,
                 fontWeight = FontWeight.Bold,
             )
         }
