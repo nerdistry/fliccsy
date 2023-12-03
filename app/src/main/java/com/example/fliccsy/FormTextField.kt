@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 
 @Composable
@@ -39,7 +40,8 @@ fun FormTextField(
                 Text(
                     text = placeholder,
                     color = placeholderColor,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp
                 )
             },
             shape = RoundedCornerShape(8.dp),
@@ -54,7 +56,9 @@ fun FormTextField(
                 .height(textFieldHeight),
             leadingIcon = {
                 Icon(imageVector = leadingIcon,
-                    contentDescription = "Icon")
+                    contentDescription = "Icon",
+                    tint = placeholderColor
+                )
             },
         )
         Spacer(modifier = Modifier.height(8.dp))

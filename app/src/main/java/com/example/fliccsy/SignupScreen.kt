@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -40,34 +41,42 @@ import androidx.compose.ui.unit.sp
 fun SignupScreen(){
     Column (
         modifier = Modifier.fillMaxWidth()
-            .padding(15.dp),
+            .padding(start = 15.dp, end = 15.dp, top = 50.dp),
     ) {
         Text(
             text = "Sign Up",
             color = Color.White,
             fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
+            fontSize = 23.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "Join the Movie Magic 🍿",
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 13.sp
+            color = Color(0xFF929090),
+            fontSize = 13.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
         )
         Text(
             text = "Discover , Share and Enjoy the Best Films Together!",
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 13.sp
+            color = Color(0xFF929090),
+            fontSize = 13.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
         )
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         FormTextField(value = "", error = "", placeholder = "Full Name", leadingIcon = Icons.Outlined.Person,
         )
-        Spacer(modifier = Modifier.height(10.dp))
         FormTextField(value = "", error = "", placeholder = "Email Address", leadingIcon = Icons.Outlined.Email,
         )
-        Spacer(modifier = Modifier.height(10.dp))
         FormTextField(value = "", error = "", placeholder = "Password", leadingIcon = Icons.Outlined.Lock,
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -83,10 +92,10 @@ fun SignupScreen(){
             )
         }
         Spacer(
-            modifier = Modifier.height(15.dp)
+            modifier = Modifier.height(45.dp)
         )
         OrSigninWithDivider()
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(25.dp))
         Row (
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -95,22 +104,22 @@ fun SignupScreen(){
             TechButton(
                 onClick = {},
                 imageUrl = R.drawable.facebook,
-                modifier = Modifier.size(22.dp)
+                modifier = Modifier.size(32.dp)
             )
             Spacer(modifier = Modifier.width(20.dp))
             TechButton(
                 onClick = {},
                 imageUrl = R.drawable.google,
-                modifier = Modifier.size(12.dp)
+                modifier = Modifier.size(22.dp)
             )
             Spacer(modifier = Modifier.width(20.dp))
             TechButton(
                 onClick = {},
                 imageUrl = R.drawable.apple,
-                modifier = Modifier.size(17.dp)
+                modifier = Modifier.size(27.dp)
             )
         }
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(25.dp))
         Row (
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -118,6 +127,7 @@ fun SignupScreen(){
         ){
             Text(
                 text = "Already have an account?",
+                fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.outline
             )
             TextButton(
@@ -153,6 +163,7 @@ fun OrSigninWithDivider() {
 
         Text(
             text = "or sign up with",
+            fontSize = 13.sp,
             color = MaterialTheme.colorScheme.outline
         )
 
@@ -182,7 +193,8 @@ private fun TechButton(
     ) {
         Image(
             painter = painterResource(id = imageUrl),
-            contentDescription = null
+            contentDescription = null,
+            modifier = modifier
         )
     }
 }
