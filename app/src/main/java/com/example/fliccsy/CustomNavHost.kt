@@ -17,7 +17,8 @@ public enum class AllRoutes(@StringRes val title: Int) {
     Settings(title = R.string.settings),
     Profile(title = R.string.profiles),
     AddProfile(title = R.string.add_profile),
-    Keypad(title = R.string.keypad)
+    Keypad(title = R.string.keypad),
+    Splash(title = R.string.splash)
 }
 
 @Composable

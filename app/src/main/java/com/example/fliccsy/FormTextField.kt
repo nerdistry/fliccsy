@@ -35,7 +35,7 @@ fun FormTextField(
     Column {
         TextField(
             value = value,
-            onValueChange = {  },
+            onValueChange = { },
             placeholder = {
                 Text(
                     text = placeholder,
@@ -55,16 +55,19 @@ fun FormTextField(
                 .fillMaxWidth()
                 .height(textFieldHeight),
             leadingIcon = {
-                Icon(imageVector = leadingIcon,
+                Icon(
+                    imageVector = leadingIcon,
                     contentDescription = "Icon",
                     tint = placeholderColor
                 )
             },
         )
         Spacer(modifier = Modifier.height(8.dp))
-        if(error != null){
-            Text(text = error,
-                color = MaterialTheme.colorScheme.error)
+        if (error != null) {
+            Text(
+                text = error,
+                color = MaterialTheme.colorScheme.error
+            )
         }
     }
 }

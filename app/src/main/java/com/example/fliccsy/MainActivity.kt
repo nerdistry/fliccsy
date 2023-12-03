@@ -22,11 +22,8 @@ import com.example.fliccsy.ui.theme.FliccsyTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //val activity = AppSettings()
-        val activity = KeyPadActivity()
         setContent {
             FliccsyTheme {
-//                 A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Color(0xFF0C0C0C),

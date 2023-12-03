@@ -4,14 +4,18 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
@@ -23,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -34,7 +39,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.fliccsy.ui.theme.FliccsyTheme
 import com.example.fliccsy.FormTextField
 
@@ -57,7 +65,8 @@ fun AddProfile(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(start = 15.dp, end = 15.dp, top = 100.dp),
+            .zIndex(3f)
+            .padding(start = 30.dp, end = 30.dp, top = 100.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -75,17 +84,54 @@ fun AddProfile(
             ),
             contentScale = ContentScale.Crop,
             modifier = Modifier
+                .zIndex(3f)
                 .size(80.dp)
                 .clip(RoundedCornerShape(30.dp))
         )
-        Spacer(modifier = Modifier.height(20.dp))
 
-        FormTextField(
-            value = "",
-            error = "",
-            placeholder = "Anna",
-            leadingIcon = Icons.Default.Person
-        )
+        ConstraintLayout() {
+            val (title, desc) = createRefs()
+            Box(
+                modifier = Modifier
+                    .alpha(0.05f)
+                    .background(Color(0xffffffff))
+                    .height(200.dp)
+                    .width(450.dp)
+                    .zIndex(1f)
+                    .border(
+                        width = 2.dp,
+                        color = Color.Transparent,
+                        shape = RoundedCornerShape(5.dp))
+                    .constrainAs(title) {
+                        top.linkTo(parent.top, margin = (-30).dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom, margin = (-100).dp)
+                    }
+            )
+        }
+//        Spacer(modifier = Modifier.height(20.dp))
+
+        ConstraintLayout() {
+            val (title, desc) = createRefs()
+
+            Box(
+                modifier = Modifier
+                    .zIndex(3f)
+                    .padding(5.dp)
+                    .constrainAs(title) {
+                        top.linkTo(parent.top, margin = (-110).dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }) {
+                FormTextField(
+                    value = "",
+                    error = "",
+                    placeholder = "Morty",
+                    leadingIcon = Icons.Default.Person
+                )
+            }
+        }
 
         Button(
             onClick = {
@@ -115,11 +161,11 @@ fun AddProfile(
 
     }
 }
-//
-//@Preview(showBackground = true, widthDp = 320)
-//@Composable
-//fun AddProfilePreview() {
-//    FliccsyTheme() {
-//        AddProfile(Modifier.fillMaxSize())
-//    }
-//}
+
+@Preview(showBackground = true, widthDp = 320)
+@Composable
+fun AddProfilePreview() {
+    FliccsyTheme() {
+        AddProfile(navController = rememberNavController())
+    }
+}

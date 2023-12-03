@@ -134,7 +134,9 @@ fun SignupScreen(
                 color = MaterialTheme.colorScheme.outline
             )
             TextButton(
-                onClick = {},
+                onClick = {
+                          navController.navigate(AllRoutes.Login.name)
+                },
                 content = {
                     Text(
                         text = "Sign in here",
