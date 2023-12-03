@@ -3,6 +3,7 @@ package com.example.fliccsy
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -54,7 +55,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SwipingBox(
     navController: NavHostController,
-){
+) {
     val state = rememberSwipeableCardState()
     val states = movies.reversed()
         .map { it to rememberSwipeableCardState() }
@@ -67,10 +68,11 @@ fun SwipingBox(
         Modifier
             .fillMaxSize()
             .background(Color(0xFFE50914))
-        ) {
+    ) {
         states.forEach { (movie, state) ->
             if (state.swipedDirection == null) {
                 MovieCard(
+                    navController = navController,
                     modifier = Modifier
                         .fillMaxSize()
                         .swipableCard(
@@ -80,7 +82,6 @@ fun SwipingBox(
 
                             },
                             onSwipeCancel = {
-                                navController.navigate(AllRoutes.Home.name)
                                 Log.d("Swipeable-Card", "Cancelled swipe")
                                 hint = "You canceled the swipe"
                             }
@@ -92,7 +93,6 @@ fun SwipingBox(
             LaunchedEffect(movie, state.swipedDirection) {
                 if (state.swipedDirection != null) {
                     hint = "You swiped ${stringFrom(state.swipedDirection!!)}"
-
                 }
             }
         }
@@ -126,19 +126,20 @@ private fun Hint(text: String) {
 }
 
 @Composable
-fun MovieCard(modifier: Modifier,movie: Movie,hint: String){
+fun MovieCard(navController:NavHostController, modifier: Modifier, movie: Movie, hint: String) {
     Box(
-       modifier = modifier
-    ){
-        Box(modifier = Modifier
-            .clip(
-                MaterialTheme.shapes.medium.copy(
-                    bottomEnd = CornerSize(20.dp),
-                    bottomStart = CornerSize(20.dp)
+        modifier = modifier
+    ) {
+        Box(
+            modifier = Modifier
+                .clip(
+                    MaterialTheme.shapes.medium.copy(
+                        bottomEnd = CornerSize(20.dp),
+                        bottomStart = CornerSize(20.dp)
+                    )
                 )
-            )
-            .background(Color(0xFF000000))
-        ){
+                .background(Color(0xFF000000))
+        ) {
             Column {
                 Image(
                     painter = painterResource(id = movie.imageUrl),
@@ -148,42 +149,69 @@ fun MovieCard(modifier: Modifier,movie: Movie,hint: String){
                         .height(430.dp)
                         .fillMaxWidth()
                 )
-                Text(movie.title,color = Color.White, fontSize = 35.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(start = 30.dp))
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(movie.actor,color = Color(0xFF929090), fontSize = 16.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(start = 30.dp))
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(movie.time,color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(start = 30.dp))
-                Spacer(modifier = Modifier.height(10.dp))
-                Row (
+                Text(
+                    movie.title,
+                    color = Color.White,
+                    fontSize = 35.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 30.dp)
-                ){
-                    Icon(imageVector = Icons.Default.Star,
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    movie.actor,
+                    color = Color(0xFF929090),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(start = 30.dp)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    movie.time,
+                    color = Color.White,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(start = 30.dp)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Row(
+                    modifier = Modifier.padding(start = 30.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
                         contentDescription = "Icon",
-                        tint = Color(0xFFF8BD00))
+                        tint = Color(0xFFF8BD00)
+                    )
                     Spacer(modifier = Modifier.height(10.dp))
-                    Icon(imageVector = Icons.Default.Star,
+                    Icon(
+                        imageVector = Icons.Default.Star,
                         contentDescription = "Icon",
-                        tint = Color(0xFFF8BD00))
+                        tint = Color(0xFFF8BD00)
+                    )
                     Spacer(modifier = Modifier.height(10.dp))
-                    Icon(imageVector = Icons.Default.Star,
+                    Icon(
+                        imageVector = Icons.Default.Star,
                         contentDescription = "Icon",
-                        tint = Color(0xFFF8BD00))
+                        tint = Color(0xFFF8BD00)
+                    )
                     Spacer(modifier = Modifier.height(10.dp))
-                    Icon(imageVector = Icons.Default.Star,
+                    Icon(
+                        imageVector = Icons.Default.Star,
                         contentDescription = "Icon",
-                        tint = Color(0xFFF8BD00))
+                        tint = Color(0xFFF8BD00)
+                    )
                     Spacer(modifier = Modifier.height(10.dp))
-                    Icon(imageVector = Icons.Default.Star,
+                    Icon(
+                        imageVector = Icons.Default.Star,
                         contentDescription = "Icon",
-                        tint = Color(0xFFF8BD00))
+                        tint = Color(0xFFF8BD00)
+                    )
                 }
                 Spacer(modifier = Modifier.height(30.dp))
                 LazyRow(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 20.dp)
-                    ,
-                ){
+                        .padding(start = 20.dp),
+                ) {
                     items(movie.tags) { tag ->
                         Box(
                             modifier = Modifier
@@ -209,11 +237,16 @@ fun MovieCard(modifier: Modifier,movie: Movie,hint: String){
             .width(60.dp)
             .align(Alignment.TopEnd)
             .padding(15.dp)
+            .clickable {
+                navController . navigate (AllRoutes.Home.name)
+            }
             .background(Color(0xFFFCE8E8).copy(alpha = 0.4F)),
             contentAlignment = Alignment.Center
-        ){
-            Icon(imageVector = Icons.Default.Clear,
-                contentDescription = "Icon")
+        ) {
+            Icon(
+                imageVector = Icons.Default.Clear,
+                contentDescription = "Icon"
+            )
         }
         Box(
             modifier = Modifier
@@ -224,7 +257,7 @@ fun MovieCard(modifier: Modifier,movie: Movie,hint: String){
                 .align(Alignment.BottomCenter)
                 .height(55.dp),
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Text(
                 text = "More Info",
                 color = Color.White,
