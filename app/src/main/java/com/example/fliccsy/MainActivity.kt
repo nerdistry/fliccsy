@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color(0xFF0C0C0C)
                 ) {
-                    SignupScreen()
+                    LoginScreen()
                 }
             }
         }

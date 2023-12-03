@@ -38,13 +38,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SignupScreen(){
+fun LoginScreen(){
     Column (
         modifier = Modifier.fillMaxWidth()
             .padding(start = 15.dp, end = 15.dp, top = 50.dp),
     ) {
         Text(
-            text = "Sign Up",
+            text = "Log in",
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 23.sp,
@@ -55,7 +55,7 @@ fun SignupScreen(){
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Join the Movie Magic 🍿",
+            text = "Welcome back, sign in to",
             color = Color(0xFF929090),
             fontSize = 13.sp,
             textAlign = TextAlign.Center,
@@ -64,7 +64,7 @@ fun SignupScreen(){
                 .align(Alignment.CenterHorizontally)
         )
         Text(
-            text = "Discover , Share and Enjoy the Best Films Together!",
+            text = "continue your cinematic journey! 🍿",
             color = Color(0xFF929090),
             fontSize = 13.sp,
             textAlign = TextAlign.Center,
@@ -72,14 +72,12 @@ fun SignupScreen(){
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
         )
-        Spacer(modifier = Modifier.height(40.dp))
-        FormTextField(value = "", error = "", placeholder = "Full Name", leadingIcon = Icons.Outlined.Person,
-        )
+        Spacer(modifier = Modifier.height(70.dp))
         FormTextField(value = "", error = "", placeholder = "Email Address", leadingIcon = Icons.Outlined.Email,
         )
         FormTextField(value = "", error = "", placeholder = "Password", leadingIcon = Icons.Outlined.Lock,
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(50.dp))
         Button(
             onClick = {},
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE50914)),
@@ -87,14 +85,14 @@ fun SignupScreen(){
             shape = RoundedCornerShape(8.dp)
         ){
             Text(
-                text = "Sign up",
+                text = "Log in",
                 fontWeight = FontWeight.Bold,
             )
         }
         Spacer(
             modifier = Modifier.height(45.dp)
         )
-        OrSigninWithDivider()
+        orSignInWithDivider()
         Spacer(modifier = Modifier.height(25.dp))
         Row (
             modifier = Modifier.fillMaxWidth(),
@@ -126,7 +124,7 @@ fun SignupScreen(){
             horizontalArrangement = Arrangement.Center
         ){
             Text(
-                text = "Already have an account?",
+                text = "Dont have an account? ",
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.outline
             )
@@ -134,7 +132,7 @@ fun SignupScreen(){
                 onClick = {},
                 content = {
                     Text(
-                        text = "Sign in here",
+                        text = "Sign up here",
                         color = Color(0xFFE50914)
                     )
                 }
@@ -145,7 +143,7 @@ fun SignupScreen(){
 
 
 @Composable
-fun OrSigninWithDivider() {
+fun orSignInWithDivider() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
